@@ -25,6 +25,10 @@ import {
   SalesPipeline,
   PipelineStage,
 } from "@/app/features/dashboard/components/SalesPipeline";
+import {
+  TasksWidget,
+  TaskItem,
+} from "@/app/features/dashboard/components/TasksWidget";
 
 const notifications: NotificationItem[] = [
   {
@@ -171,6 +175,37 @@ const pipelineStages: PipelineStage[] = [
   },
 ];
 
+const tasks: TaskItem[] = [
+  {
+    id: "1",
+    title: "Review Marketing Proposal",
+    due: "Due Today",
+    completed: false,
+    priority: "High",
+  },
+  {
+    id: "2",
+    title: "Follow up with John Smith",
+    due: "Tomorrow",
+    completed: false,
+    priority: "Medium",
+  },
+  {
+    id: "3",
+    title: "Update CRM Pipeline",
+    due: "Completed",
+    completed: true,
+    priority: "Low",
+  },
+  {
+    id: "4",
+    title: "Approve Facebook Campaign",
+    due: "Today",
+    completed: false,
+    priority: "High",
+  },
+];
+
 export default function DashboardPage() {
   return (
     <main className="min-h-screen bg-slate-100 p-10">
@@ -220,10 +255,9 @@ export default function DashboardPage() {
         <SalesPipeline stages={pipelineStages} />
       </section>
 
-      <section className="mt-8">
-        <ActivityFeed
-          items={dashboardData.activities}
-        />
+      <section className="mt-8 grid gap-6 xl:grid-cols-2">
+        <TasksWidget tasks={tasks} />
+        <ActivityFeed items={dashboardData.activities} />
       </section>
     </main>
   );
