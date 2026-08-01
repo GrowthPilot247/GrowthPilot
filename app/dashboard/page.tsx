@@ -21,6 +21,10 @@ import {
   RecentLeads,
   Lead,
 } from "@/app/features/dashboard/components/RecentLeads";
+import {
+  SalesPipeline,
+  PipelineStage,
+} from "@/app/features/dashboard/components/SalesPipeline";
 
 const notifications: NotificationItem[] = [
   {
@@ -129,6 +133,44 @@ const recentLeads: Lead[] = [
   },
 ];
 
+const pipelineStages: PipelineStage[] = [
+  {
+    id: "1",
+    stage: "New",
+    deals: 18,
+    value: 120000,
+    progress: 24,
+  },
+  {
+    id: "2",
+    stage: "Qualified",
+    deals: 14,
+    value: 210000,
+    progress: 46,
+  },
+  {
+    id: "3",
+    stage: "Proposal",
+    deals: 8,
+    value: 185000,
+    progress: 32,
+  },
+  {
+    id: "4",
+    stage: "Negotiation",
+    deals: 5,
+    value: 140000,
+    progress: 18,
+  },
+  {
+    id: "5",
+    stage: "Won",
+    deals: 3,
+    value: 95000,
+    progress: 10,
+  },
+];
+
 export default function DashboardPage() {
   return (
     <main className="min-h-screen bg-slate-100 p-10">
@@ -137,7 +179,6 @@ export default function DashboardPage() {
         userName="Mackson Alex"
       />
 
-      {/* Global Search */}
       <section className="mt-6">
         <GlobalSearch
           recentSearches={recentSearches}
@@ -145,7 +186,6 @@ export default function DashboardPage() {
         />
       </section>
 
-      {/* KPI Cards */}
       <section className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
         {dashboardData.kpis.map((kpi) => (
           <KpiCard
@@ -158,32 +198,29 @@ export default function DashboardPage() {
         ))}
       </section>
 
-      {/* Revenue + AI */}
       <section className="mt-8 grid gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2">
           <RevenueChart data={dashboardData.revenue} />
         </div>
 
-        <div>
-          <AIAssistant />
-        </div>
+        <AIAssistant />
       </section>
 
-      {/* Quick Actions */}
       <section className="mt-8">
         <QuickActions />
       </section>
 
-      {/* Notifications + Calendar */}
       <section className="mt-8 grid gap-6 xl:grid-cols-2">
         <NotificationCenter notifications={notifications} />
         <CalendarWidget events={calendarEvents} />
       </section>
 
-      {/* Recent Leads + Activity */}
       <section className="mt-8 grid gap-6 xl:grid-cols-2">
         <RecentLeads leads={recentLeads} />
+        <SalesPipeline stages={pipelineStages} />
+      </section>
 
+      <section className="mt-8">
         <ActivityFeed
           items={dashboardData.activities}
         />
