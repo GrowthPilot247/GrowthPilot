@@ -5,6 +5,34 @@ import { ActivityFeed } from "@/app/features/dashboard/components/ActivityFeed";
 import { RevenueChart } from "@/app/features/dashboard/components/RevenueChart";
 import { AIAssistant } from "@/app/features/dashboard/components/AIAssistant";
 import { QuickActions } from "@/app/features/dashboard/components/QuickActions";
+import {
+  NotificationCenter,
+  NotificationItem,
+} from "@/app/features/dashboard/components/NotificationCenter";
+
+const notifications: NotificationItem[] = [
+  {
+    id: "1",
+    title: "Campaign Published",
+    description: "Summer Growth Campaign is now live.",
+    time: "5 min ago",
+    type: "success",
+  },
+  {
+    id: "2",
+    title: "Revenue Target Alert",
+    description: "Monthly revenue has reached 82% of target.",
+    time: "30 min ago",
+    type: "info",
+  },
+  {
+    id: "3",
+    title: "Subscription Renewal",
+    description: "Your Pro plan renews in 3 days.",
+    time: "Today",
+    type: "warning",
+  },
+];
 
 export default function DashboardPage() {
   return (
@@ -45,8 +73,12 @@ export default function DashboardPage() {
         <QuickActions />
       </section>
 
-      {/* Activity Feed */}
-      <section className="mt-8">
+      {/* Notifications + Activity */}
+      <section className="mt-8 grid gap-6 lg:grid-cols-2">
+        <NotificationCenter
+          notifications={notifications}
+        />
+
         <ActivityFeed
           items={dashboardData.activities}
         />
