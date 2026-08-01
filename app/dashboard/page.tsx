@@ -13,6 +13,10 @@ import {
   GlobalSearch,
   SearchResult,
 } from "@/app/features/dashboard/components/GlobalSearch";
+import {
+  CalendarWidget,
+  CalendarEvent,
+} from "@/app/features/dashboard/components/CalendarWidget";
 
 const notifications: NotificationItem[] = [
   {
@@ -67,6 +71,30 @@ const recentSearches = [
   "Revenue Report",
 ];
 
+const calendarEvents: CalendarEvent[] = [
+  {
+    id: "1",
+    title: "Sales Team Meeting",
+    date: "Today",
+    time: "10:00 AM",
+    category: "meeting",
+  },
+  {
+    id: "2",
+    title: "Launch Summer Campaign",
+    date: "Tomorrow",
+    time: "2:00 PM",
+    category: "campaign",
+  },
+  {
+    id: "3",
+    title: "Renew Pro Subscription",
+    date: "Aug 5",
+    time: "9:00 AM",
+    category: "billing",
+  },
+];
+
 export default function DashboardPage() {
   return (
     <main className="min-h-screen bg-slate-100 p-10">
@@ -112,12 +140,19 @@ export default function DashboardPage() {
         <QuickActions />
       </section>
 
-      {/* Notifications + Activity */}
-      <section className="mt-8 grid gap-6 lg:grid-cols-2">
+      {/* Notifications + Calendar */}
+      <section className="mt-8 grid gap-6 xl:grid-cols-2">
         <NotificationCenter
           notifications={notifications}
         />
 
+        <CalendarWidget
+          events={calendarEvents}
+        />
+      </section>
+
+      {/* Activity Feed */}
+      <section className="mt-8">
         <ActivityFeed
           items={dashboardData.activities}
         />
