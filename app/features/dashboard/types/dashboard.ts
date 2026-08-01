@@ -18,8 +18,14 @@ export interface RevenueItem {
   revenue: number;
 }
 
+export interface AIAction {
+  id: string;
+  title: string;
+}
+
 export interface DashboardData {
   kpis: KPI[];
   activities: ActivityItem[];
   revenue: RevenueItem[];
+  aiActions: AIAction[];
 }

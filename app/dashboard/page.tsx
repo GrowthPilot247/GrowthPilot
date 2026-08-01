@@ -3,6 +3,7 @@ import { dashboardData } from "@/app/features/dashboard/constants/mockDashboard"
 import { KpiCard } from "@/app/features/dashboard/components/KpiCard";
 import { ActivityFeed } from "@/app/features/dashboard/components/ActivityFeed";
 import { RevenueChart } from "@/app/features/dashboard/components/RevenueChart";
+import { AIAssistant } from "@/app/features/dashboard/components/AIAssistant";
 
 export default function DashboardPage() {
   return (
@@ -27,13 +28,20 @@ export default function DashboardPage() {
 
       {/* Dashboard Widgets */}
       <div className="mt-8 grid gap-6 lg:grid-cols-3">
+        {/* Revenue Chart */}
         <div className="lg:col-span-2">
           <RevenueChart
             data={dashboardData.revenue}
           />
         </div>
 
+        {/* AI Assistant */}
         <div>
+          <AIAssistant />
+        </div>
+
+        {/* Activity Feed */}
+        <div className="lg:col-span-3">
           <ActivityFeed
             items={dashboardData.activities}
           />

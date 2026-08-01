@@ -62,4 +62,23 @@ export const dashboardData: DashboardData = {
     { month: "Jun", revenue: 34100 },
     { month: "Jul", revenue: 48230 },
   ],
+
+  aiActions: [
+    {
+      id: "1",
+      title: "Generate Marketing Campaign",
+    },
+    {
+      id: "2",
+      title: "Create Email Sequence",
+    },
+    {
+      id: "3",
+      title: "Analyze Revenue Trends",
+    },
+    {
+      id: "4",
+      title: "Recommend Next Business Action",
+    },
+  ],
 };
