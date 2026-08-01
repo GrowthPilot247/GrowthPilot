@@ -1,3 +1,5 @@
+import { Button } from "@/app/components/ui/Button";
+
 export default function Hero() {
   return (
     <section className="min-h-screen bg-slate-950 text-white flex items-center justify-center px-6">
@@ -19,9 +21,9 @@ export default function Hero() {
           marketers, agencies, and modern businesses.
         </p>
 
-        <button className="mt-10 rounded-xl bg-emerald-500 px-8 py-4 font-semibold text-slate-950 hover:bg-emerald-400 transition">
-          Get Started
-        </button>
+        <div className="mt-10">
+          <Button>Get Started</Button>
+        </div>
       </div>
     </section>
   );

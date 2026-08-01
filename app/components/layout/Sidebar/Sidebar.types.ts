@@ -1,0 +1,19 @@
+import { ReactNode } from "react";
+
+export interface SidebarItem {
+  id: string;
+  label: string;
+  href: string;
+  icon?: ReactNode;
+}
+
+export interface SidebarSection {
+  title: string;
+  items: SidebarItem[];
+}
+
+export interface SidebarProps {
+  sections: SidebarSection[];
+  activeItem: string;
+  onNavigate?: (id: string) => void;
+}
