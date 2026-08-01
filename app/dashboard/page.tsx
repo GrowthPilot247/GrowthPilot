@@ -17,6 +17,10 @@ import {
   CalendarWidget,
   CalendarEvent,
 } from "@/app/features/dashboard/components/CalendarWidget";
+import {
+  RecentLeads,
+  Lead,
+} from "@/app/features/dashboard/components/RecentLeads";
 
 const notifications: NotificationItem[] = [
   {
@@ -95,6 +99,36 @@ const calendarEvents: CalendarEvent[] = [
   },
 ];
 
+const recentLeads: Lead[] = [
+  {
+    id: "1",
+    name: "John Smith",
+    company: "Acme Inc.",
+    owner: "Mackson Alex",
+    value: 24000,
+    status: "Qualified",
+    lastActivity: "10 min ago",
+  },
+  {
+    id: "2",
+    name: "Sarah Johnson",
+    company: "TechLabs",
+    owner: "Grace Adams",
+    value: 12500,
+    status: "New",
+    lastActivity: "30 min ago",
+  },
+  {
+    id: "3",
+    name: "David Brown",
+    company: "Growth Ltd",
+    owner: "Daniel James",
+    value: 45800,
+    status: "Proposal Sent",
+    lastActivity: "1 hour ago",
+  },
+];
+
 export default function DashboardPage() {
   return (
     <main className="min-h-screen bg-slate-100 p-10">
@@ -124,7 +158,7 @@ export default function DashboardPage() {
         ))}
       </section>
 
-      {/* Analytics + AI */}
+      {/* Revenue + AI */}
       <section className="mt-8 grid gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2">
           <RevenueChart data={dashboardData.revenue} />
@@ -142,17 +176,14 @@ export default function DashboardPage() {
 
       {/* Notifications + Calendar */}
       <section className="mt-8 grid gap-6 xl:grid-cols-2">
-        <NotificationCenter
-          notifications={notifications}
-        />
-
-        <CalendarWidget
-          events={calendarEvents}
-        />
+        <NotificationCenter notifications={notifications} />
+        <CalendarWidget events={calendarEvents} />
       </section>
 
-      {/* Activity Feed */}
-      <section className="mt-8">
+      {/* Recent Leads + Activity */}
+      <section className="mt-8 grid gap-6 xl:grid-cols-2">
+        <RecentLeads leads={recentLeads} />
+
         <ActivityFeed
           items={dashboardData.activities}
         />
