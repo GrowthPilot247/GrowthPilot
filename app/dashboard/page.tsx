@@ -4,6 +4,7 @@ import { KpiCard } from "@/app/features/dashboard/components/KpiCard";
 import { ActivityFeed } from "@/app/features/dashboard/components/ActivityFeed";
 import { RevenueChart } from "@/app/features/dashboard/components/RevenueChart";
 import { AIAssistant } from "@/app/features/dashboard/components/AIAssistant";
+import { QuickActions } from "@/app/features/dashboard/components/QuickActions";
 
 export default function DashboardPage() {
   return (
@@ -14,7 +15,7 @@ export default function DashboardPage() {
       />
 
       {/* KPI Cards */}
-      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+      <section className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
         {dashboardData.kpis.map((kpi) => (
           <KpiCard
             key={kpi.id}
@@ -24,29 +25,32 @@ export default function DashboardPage() {
             trend={kpi.trend}
           />
         ))}
-      </div>
+      </section>
 
-      {/* Dashboard Widgets */}
-      <div className="mt-8 grid gap-6 lg:grid-cols-3">
-        {/* Revenue Chart */}
+      {/* Analytics + AI */}
+      <section className="mt-8 grid gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2">
           <RevenueChart
             data={dashboardData.revenue}
           />
         </div>
 
-        {/* AI Assistant */}
         <div>
           <AIAssistant />
         </div>
+      </section>
 
-        {/* Activity Feed */}
-        <div className="lg:col-span-3">
-          <ActivityFeed
-            items={dashboardData.activities}
-          />
-        </div>
-      </div>
+      {/* Quick Actions */}
+      <section className="mt-8">
+        <QuickActions />
+      </section>
+
+      {/* Activity Feed */}
+      <section className="mt-8">
+        <ActivityFeed
+          items={dashboardData.activities}
+        />
+      </section>
     </main>
   );
 }
