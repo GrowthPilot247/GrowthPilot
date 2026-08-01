@@ -9,6 +9,10 @@ import {
   NotificationCenter,
   NotificationItem,
 } from "@/app/features/dashboard/components/NotificationCenter";
+import {
+  GlobalSearch,
+  SearchResult,
+} from "@/app/features/dashboard/components/GlobalSearch";
 
 const notifications: NotificationItem[] = [
   {
@@ -34,6 +38,35 @@ const notifications: NotificationItem[] = [
   },
 ];
 
+const searchResults: SearchResult[] = [
+  {
+    id: "1",
+    title: "John Smith",
+    category: "CRM Contact",
+  },
+  {
+    id: "2",
+    title: "Q3 Marketing Campaign",
+    category: "Marketing",
+  },
+  {
+    id: "3",
+    title: "Revenue Analytics",
+    category: "Reports",
+  },
+  {
+    id: "4",
+    title: "AI Proposal Generator",
+    category: "AI Workspace",
+  },
+];
+
+const recentSearches = [
+  "Marketing Dashboard",
+  "CRM Contacts",
+  "Revenue Report",
+];
+
 export default function DashboardPage() {
   return (
     <main className="min-h-screen bg-slate-100 p-10">
@@ -42,8 +75,16 @@ export default function DashboardPage() {
         userName="Mackson Alex"
       />
 
+      {/* Global Search */}
+      <section className="mt-6">
+        <GlobalSearch
+          recentSearches={recentSearches}
+          results={searchResults}
+        />
+      </section>
+
       {/* KPI Cards */}
-      <section className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+      <section className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
         {dashboardData.kpis.map((kpi) => (
           <KpiCard
             key={kpi.id}
@@ -58,9 +99,7 @@ export default function DashboardPage() {
       {/* Analytics + AI */}
       <section className="mt-8 grid gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2">
-          <RevenueChart
-            data={dashboardData.revenue}
-          />
+          <RevenueChart data={dashboardData.revenue} />
         </div>
 
         <div>
