@@ -4,6 +4,7 @@ import { KpiCard } from "@/app/features/dashboard/components/KpiCard";
 import { RevenueChart } from "@/app/features/dashboard/components/RevenueChart";
 import { AIAssistant } from "@/app/features/dashboard/components/AIAssistant";
 import { AIInsightsWidget } from "@/app/features/dashboard/components/AIInsightsWidget";
+import { ExecutiveSummaryWidget } from "@/app/features/dashboard/components/ExecutiveSummaryWidget";
 import { QuickActions } from "@/app/features/dashboard/components/QuickActions";
 import { NotificationCenter } from "@/app/features/dashboard/components/NotificationCenter";
 import { CalendarWidget } from "@/app/features/dashboard/components/CalendarWidget";
@@ -31,6 +32,7 @@ import {
 import { teamMembers } from "@/app/features/dashboard/constants/mockPeople";
 import { goals } from "@/app/features/dashboard/constants/mockStrategy";
 import { aiInsights } from "@/app/features/dashboard/constants/mockAI";
+import { executiveSummary } from "@/app/features/dashboard/constants/mockExecutiveSummary";
 
 export default function DashboardPage() {
   return (
@@ -70,6 +72,13 @@ export default function DashboardPage() {
         </div>
 
         <AIAssistant />
+      </section>
+
+      {/* Executive Summary */}
+      <section className="mt-8">
+        <ExecutiveSummaryWidget
+          summaries={executiveSummary}
+        />
       </section>
 
       {/* AI Insights */}
