@@ -3,6 +3,7 @@ import { GlobalSearch } from "@/app/features/dashboard/components/GlobalSearch";
 import { KpiCard } from "@/app/features/dashboard/components/KpiCard";
 import { RevenueChart } from "@/app/features/dashboard/components/RevenueChart";
 import { AIAssistant } from "@/app/features/dashboard/components/AIAssistant";
+import { AIInsightsWidget } from "@/app/features/dashboard/components/AIInsightsWidget";
 import { QuickActions } from "@/app/features/dashboard/components/QuickActions";
 import { NotificationCenter } from "@/app/features/dashboard/components/NotificationCenter";
 import { CalendarWidget } from "@/app/features/dashboard/components/CalendarWidget";
@@ -27,12 +28,9 @@ import {
   recentLeads,
   pipelineStages,
 } from "@/app/features/dashboard/constants/mockCRM";
-import {
-  teamMembers,
-} from "@/app/features/dashboard/constants/mockPeople";
-import {
-  goals,
-} from "@/app/features/dashboard/constants/mockStrategy";
+import { teamMembers } from "@/app/features/dashboard/constants/mockPeople";
+import { goals } from "@/app/features/dashboard/constants/mockStrategy";
+import { aiInsights } from "@/app/features/dashboard/constants/mockAI";
 
 export default function DashboardPage() {
   return (
@@ -63,7 +61,7 @@ export default function DashboardPage() {
         ))}
       </section>
 
-      {/* Revenue + AI */}
+      {/* Revenue + AI Assistant */}
       <section className="mt-8 grid gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2">
           <RevenueChart
@@ -72,6 +70,13 @@ export default function DashboardPage() {
         </div>
 
         <AIAssistant />
+      </section>
+
+      {/* AI Insights */}
+      <section className="mt-8">
+        <AIInsightsWidget
+          insights={aiInsights}
+        />
       </section>
 
       {/* Quick Actions */}
@@ -101,7 +106,7 @@ export default function DashboardPage() {
         />
       </section>
 
-      {/* Operations + People */}
+      {/* Tasks + Team */}
       <section className="mt-8 grid gap-6 xl:grid-cols-2">
         <TasksWidget
           tasks={tasks}
@@ -112,7 +117,7 @@ export default function DashboardPage() {
         />
       </section>
 
-      {/* Strategy + Timeline */}
+      {/* Strategy + Activity */}
       <section className="mt-8 grid gap-6 xl:grid-cols-2">
         <GoalsWidget
           goals={goals}
