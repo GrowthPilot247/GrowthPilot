@@ -7,6 +7,8 @@ import {
   AlertTriangle,
 } from "lucide-react";
 
+import { DashboardCard } from "@/app/components/ui/dashboard-card";
+
 export interface RevenueForecast {
   period: string;
   amount: string;
@@ -42,43 +44,23 @@ export function RevenueIntelligenceWidget({
   intelligence,
 }: RevenueIntelligenceWidgetProps) {
   return (
-    <section className="rounded-xl border border-slate-200 bg-white shadow-sm">
-
-      <header className="flex items-center justify-between border-b border-slate-100 p-6">
-
-        <div className="flex items-center gap-3">
-
-          <div className="rounded-full bg-violet-100 p-2">
-            <BrainCircuit className="h-5 w-5 text-violet-600" />
-          </div>
-
-          <div>
-            <h2 className="text-lg font-semibold text-slate-900">
-              AI Revenue Intelligence
-            </h2>
-
-            <p className="text-sm text-slate-500">
-              Forecast • Analysis • Recommendation
-            </p>
-          </div>
-
-        </div>
-
+    <DashboardCard
+      title="AI Revenue Intelligence"
+      description="Forecast • Analysis • Recommendation"
+      icon={<BrainCircuit className="h-5 w-5 text-violet-600" />}
+      action={
         <button
-          className="inline-flex items-center gap-2 text-sm font-medium text-emerald-600 hover:text-emerald-700"
+          type="button"
+          className="inline-flex items-center gap-2 text-sm font-medium text-emerald-600 transition-colors hover:text-emerald-700"
         >
           View Details
           <ArrowRight className="h-4 w-4" />
         </button>
-
-      </header>
-
-      <div className="space-y-6 p-6">
-
+      }
+    >
+      <div className="space-y-6">
         <div className="flex items-center justify-between">
-
           <div>
-
             <p className="text-sm text-slate-500">
               Expected Revenue
             </p>
@@ -87,17 +69,18 @@ export function RevenueIntelligenceWidget({
               {intelligence.forecast.amount}
             </h3>
 
+            <p className="mt-1 text-sm text-slate-500">
+              {intelligence.forecast.period}
+            </p>
           </div>
 
-          <div className="rounded-full bg-emerald-100 px-4 py-2 text-emerald-700 font-semibold">
+          <div className="rounded-full bg-emerald-100 px-4 py-2 font-semibold text-emerald-700">
             <TrendingUp className="mr-1 inline h-4 w-4" />
             {intelligence.forecast.growth}
           </div>
-
         </div>
 
         <div className="grid grid-cols-3 gap-3">
-
           <div className="rounded-lg bg-emerald-50 p-4">
             <p className="text-xs text-slate-500">Best</p>
             <p className="mt-1 font-semibold">
@@ -118,11 +101,9 @@ export function RevenueIntelligenceWidget({
               {intelligence.scenario.worst}
             </p>
           </div>
-
         </div>
 
         <div>
-
           <h4 className="font-semibold text-slate-900">
             AI Explanation
           </h4>
@@ -130,11 +111,9 @@ export function RevenueIntelligenceWidget({
           <p className="mt-2 text-sm leading-6 text-slate-600">
             {intelligence.explanation}
           </p>
-
         </div>
 
         <div>
-
           <h4 className="font-semibold text-slate-900">
             Recommendation
           </h4>
@@ -142,11 +121,9 @@ export function RevenueIntelligenceWidget({
           <p className="mt-2 text-sm leading-6 text-slate-600">
             {intelligence.recommendation}
           </p>
-
         </div>
 
         <div className="flex items-center justify-between">
-
           <span
             className={`rounded-full px-3 py-1 text-xs font-medium ${riskStyles[intelligence.risk]}`}
           >
@@ -157,11 +134,8 @@ export function RevenueIntelligenceWidget({
           <span className="font-semibold text-violet-600">
             AI Confidence {intelligence.confidence}%
           </span>
-
         </div>
-
       </div>
-
-    </section>
+    </DashboardCard>
   );
 }
