@@ -5,6 +5,7 @@ import { RevenueChart } from "@/app/features/dashboard/components/RevenueChart";
 import { AIAssistant } from "@/app/features/dashboard/components/AIAssistant";
 import { AIInsightsWidget } from "@/app/features/dashboard/components/AIInsightsWidget";
 import { ExecutiveSummaryWidget } from "@/app/features/dashboard/components/ExecutiveSummaryWidget";
+import { RevenueIntelligenceWidget } from "@/app/features/dashboard/components/RevenueIntelligenceWidget";
 import { QuickActions } from "@/app/features/dashboard/components/QuickActions";
 import { NotificationCenter } from "@/app/features/dashboard/components/NotificationCenter";
 import { CalendarWidget } from "@/app/features/dashboard/components/CalendarWidget";
@@ -33,6 +34,7 @@ import { teamMembers } from "@/app/features/dashboard/constants/mockPeople";
 import { goals } from "@/app/features/dashboard/constants/mockStrategy";
 import { aiInsights } from "@/app/features/dashboard/constants/mockAI";
 import { executiveSummary } from "@/app/features/dashboard/constants/mockExecutiveSummary";
+import { revenueIntelligence } from "@/app/features/dashboard/constants/mockRevenueIntelligence";
 
 export default function DashboardPage() {
   return (
@@ -63,7 +65,7 @@ export default function DashboardPage() {
         ))}
       </section>
 
-      {/* Revenue + AI Assistant */}
+      {/* Revenue Analytics + AI Assistant */}
       <section className="mt-8 grid gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2">
           <RevenueChart
@@ -72,6 +74,13 @@ export default function DashboardPage() {
         </div>
 
         <AIAssistant />
+      </section>
+
+      {/* AI Revenue Intelligence */}
+      <section className="mt-8">
+        <RevenueIntelligenceWidget
+          intelligence={revenueIntelligence}
+        />
       </section>
 
       {/* Executive Summary */}
