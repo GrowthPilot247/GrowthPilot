@@ -15,6 +15,7 @@
 import type {
   ExecutiveIntelligence,
   ExecutiveMetric,
+  ExecutiveInsight,
 } from "../types/executive-intelligence.types";
 
 import { getBusinessHealthMetric } from "./business-score.service";
@@ -22,6 +23,7 @@ import { getExecutiveRecommendations } from "./recommendation-engine.service";
 import { getExecutiveRisks } from "./risk-engine.service";
 import { getExecutiveOpportunities } from "./opportunity-engine.service";
 import { getExecutivePriorities } from "./priority-engine.service";
+import { generateExecutiveBrief } from "./executive-brief-generator.service";
 
 const metrics: ExecutiveMetric[] = [
   getBusinessHealthMetric(),
@@ -48,6 +50,13 @@ const metrics: ExecutiveMetric[] = [
   },
 ];
 
+const executiveBrief: ExecutiveInsight[] =
+  generateExecutiveBrief().map((message, index) => ({
+    id: index + 1,
+    category: "Executive",
+    message,
+  }));
+
 const intelligence: ExecutiveIntelligence = {
   greeting: {
     title: "Good Morning, Mackson Alex 👋",
@@ -58,32 +67,7 @@ const intelligence: ExecutiveIntelligence = {
 
   metrics,
 
-  executiveBrief: [
-    {
-      id: 1,
-      category: "Revenue",
-      message:
-        "Revenue continues to grow due to improved customer retention.",
-    },
-    {
-      id: 2,
-      category: "Marketing",
-      message:
-        "Marketing ROI improved after campaign optimisation.",
-    },
-    {
-      id: 3,
-      category: "Finance",
-      message:
-        "Two enterprise invoices require executive attention.",
-    },
-    {
-      id: 4,
-      category: "Operations",
-      message:
-        "Inventory remains healthy across strategic products.",
-    },
-  ],
+  executiveBrief,
 
   recommendations: getExecutiveRecommendations().map(
     (recommendation) => recommendation.title,
