@@ -3,12 +3,12 @@
  * GrowthPilot Executive Intelligence Service
  * ============================================================
  * Mission:
- * GP-MSN-001 — Executive Copilot v1
+ * GP-MSN-001 — Sprint 4
  *
  * Description:
  * Aggregates executive intelligence from the dedicated
  * intelligence engines while maintaining the existing
- * service API used by the dashboard.
+ * dashboard API.
  * ============================================================
  */
 
@@ -69,21 +69,13 @@ const intelligence: ExecutiveIntelligence = {
 
   executiveBrief,
 
-  recommendations: getExecutiveRecommendations().map(
-    (recommendation) => recommendation.title,
-  ),
+  recommendations: getExecutiveRecommendations(),
 
-  priorities: getExecutivePriorities().map(
-    (priority) => priority.title,
-  ),
+  priorities: getExecutivePriorities(),
 
-  risks: getExecutiveRisks().map(
-    (risk) => risk.title,
-  ),
+  risks: getExecutiveRisks(),
 
-  opportunities: getExecutiveOpportunities().map(
-    (opportunity) => opportunity.title,
-  ),
+  opportunities: getExecutiveOpportunities(),
 };
 
 export function getExecutiveIntelligence(): ExecutiveIntelligence {

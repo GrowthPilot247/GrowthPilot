@@ -3,12 +3,12 @@
  * GrowthPilot Executive Intelligence Types
  * ============================================================
  * Mission:
- * GP-MSN-001 — Executive Copilot v1
+ * GP-MSN-001 — Sprint 4
  *
  * Description:
- * Shared type definitions for the Executive Intelligence Engine.
- * These interfaces are consumed by services and dashboard
- * components throughout the Executive Copilot.
+ * Shared domain models for the Executive Intelligence Engine.
+ * These models are intentionally rich so dashboard components
+ * receive complete business objects rather than plain strings.
  * ============================================================
  */
 
@@ -32,10 +32,28 @@ export interface ExecutiveInsight {
   message: string;
 }
 
+export type ExecutiveSeverity =
+  | "critical"
+  | "high"
+  | "medium"
+  | "low";
+
+export type ExecutiveImpact =
+  | "high"
+  | "medium"
+  | "low";
+
+export interface ExecutiveRecommendation {
+  id: string;
+  title: string;
+  description: string;
+  priority: number;
+}
+
 export interface ExecutiveRisk {
   id: string;
   title: string;
-  severity: "critical" | "high" | "medium" | "low";
+  severity: ExecutiveSeverity;
   description: string;
   recommendation: string;
 }
@@ -43,16 +61,9 @@ export interface ExecutiveRisk {
 export interface ExecutiveOpportunity {
   id: string;
   title: string;
-  impact: "high" | "medium" | "low";
+  impact: ExecutiveImpact;
   description: string;
   expectedValue?: string;
-}
-
-export interface ExecutiveRecommendation {
-  id: string;
-  title: string;
-  description: string;
-  priority: number;
 }
 
 export interface ExecutivePriority {
@@ -65,7 +76,7 @@ export interface ExecutiveAlert {
   id: string;
   title: string;
   description: string;
-  severity: "critical" | "warning" | "info";
+  severity: ExecutiveSeverity;
 }
 
 export interface ExecutiveIntelligence {
@@ -75,11 +86,11 @@ export interface ExecutiveIntelligence {
 
   executiveBrief: ExecutiveInsight[];
 
-  recommendations: string[];
+  recommendations: ExecutiveRecommendation[];
 
-  priorities: string[];
+  priorities: ExecutivePriority[];
 
-  risks: string[];
+  risks: ExecutiveRisk[];
 
-  opportunities: string[];
+  opportunities: ExecutiveOpportunity[];
 }
