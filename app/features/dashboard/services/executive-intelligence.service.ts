@@ -1,36 +1,25 @@
-export interface ExecutiveMetric {
-  id: string;
-  label: string;
-  value: string;
-  trend: string;
-}
+/**
+ * ============================================================
+ * GrowthPilot Executive Intelligence Service
+ * ============================================================
+ * Mission:
+ * GP-MSN-001 — Executive Copilot v1
+ *
+ * Description:
+ * Aggregates executive intelligence from the dedicated
+ * intelligence engines while maintaining the existing
+ * service API used by the dashboard.
+ * ============================================================
+ */
 
-export interface ExecutiveInsight {
-  id: number;
-  category: string;
-  message: string;
-}
+import type {
+  ExecutiveIntelligence,
+} from "../types/executive-intelligence.types";
 
-export interface ExecutiveIntelligence {
-  greeting: {
-    title: string;
-    subtitle: string;
-    live: boolean;
-    updated: string;
-  };
-
-  metrics: ExecutiveMetric[];
-
-  executiveBrief: ExecutiveInsight[];
-
-  recommendations: string[];
-
-  priorities: string[];
-
-  risks: string[];
-
-  opportunities: string[];
-}
+import { getExecutiveRecommendations } from "./recommendation-engine.service";
+import { getExecutiveRisks } from "./risk-engine.service";
+import { getExecutiveOpportunities } from "./opportunity-engine.service";
+import { getExecutivePriorities } from "./priority-engine.service";
 
 const intelligence: ExecutiveIntelligence = {
   greeting: {
@@ -94,29 +83,21 @@ const intelligence: ExecutiveIntelligence = {
     },
   ],
 
-  recommendations: [
-    "Increase LinkedIn campaign budget by 12%.",
-    "Contact ABC Manufacturing.",
-    "Follow up with 14 enterprise leads.",
-  ],
+  recommendations: getExecutiveRecommendations().map(
+    (recommendation) => recommendation.title,
+  ),
 
-  priorities: [
-    "Approve Marketing Budget",
-    "Review Revenue Forecast",
-    "Executive Meeting – 2:00 PM",
-    "Review Finance Alerts",
-  ],
+  priorities: getExecutivePriorities().map(
+    (priority) => priority.title,
+  ),
 
-  risks: [
-    "Two overdue invoices.",
-    "Cash flow review recommended.",
-  ],
+  risks: getExecutiveRisks().map(
+    (risk) => risk.title,
+  ),
 
-  opportunities: [
-    "Potential ₦8.5M revenue recovery.",
-    "Six contracts ready for renewal.",
-    "18 customers eligible for upsell.",
-  ],
+  opportunities: getExecutiveOpportunities().map(
+    (opportunity) => opportunity.title,
+  ),
 };
 
 export function getExecutiveIntelligence(): ExecutiveIntelligence {
