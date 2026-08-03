@@ -14,12 +14,39 @@
 
 import type {
   ExecutiveIntelligence,
+  ExecutiveMetric,
 } from "../types/executive-intelligence.types";
 
+import { getBusinessHealthMetric } from "./business-score.service";
 import { getExecutiveRecommendations } from "./recommendation-engine.service";
 import { getExecutiveRisks } from "./risk-engine.service";
 import { getExecutiveOpportunities } from "./opportunity-engine.service";
 import { getExecutivePriorities } from "./priority-engine.service";
+
+const metrics: ExecutiveMetric[] = [
+  getBusinessHealthMetric(),
+
+  {
+    id: "revenue",
+    label: "Revenue",
+    value: "+18%",
+    trend: "+3%",
+  },
+
+  {
+    id: "forecast",
+    label: "Forecast",
+    value: "+15%",
+    trend: "94% confidence",
+  },
+
+  {
+    id: "risk",
+    label: "Risk",
+    value: "Low",
+    trend: "2 alerts",
+  },
+];
 
 const intelligence: ExecutiveIntelligence = {
   greeting: {
@@ -29,32 +56,7 @@ const intelligence: ExecutiveIntelligence = {
     updated: "Updated just now",
   },
 
-  metrics: [
-    {
-      id: "health",
-      label: "Business Health",
-      value: "92 / 100",
-      trend: "+4",
-    },
-    {
-      id: "revenue",
-      label: "Revenue",
-      value: "+18%",
-      trend: "+3%",
-    },
-    {
-      id: "forecast",
-      label: "Forecast",
-      value: "+15%",
-      trend: "94% confidence",
-    },
-    {
-      id: "risk",
-      label: "Risk",
-      value: "Low",
-      trend: "2 alerts",
-    },
-  ],
+  metrics,
 
   executiveBrief: [
     {
