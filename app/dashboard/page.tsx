@@ -17,33 +17,25 @@ import { TeamPerformanceWidget } from "@/app/features/dashboard/components/TeamP
 import { GoalsWidget } from "@/app/features/dashboard/components/GoalsWidget";
 import { ActivityFeed } from "@/app/features/dashboard/components/ActivityFeed";
 
+import { dashboardData } from "@/app/features/dashboard/constants/mockDashboard";
 import {
   recentSearches,
   searchResults,
 } from "@/app/features/dashboard/constants/mockSearch";
-
 import {
   notifications,
   calendarEvents,
   tasks,
 } from "@/app/features/dashboard/constants/mockOperations";
-
 import {
   recentLeads,
   pipelineStages,
 } from "@/app/features/dashboard/constants/mockCRM";
-
 import { teamMembers } from "@/app/features/dashboard/constants/mockPeople";
 import { goals } from "@/app/features/dashboard/constants/mockStrategy";
 import { aiInsights } from "@/app/features/dashboard/constants/mockAI";
 import { executiveSummary } from "@/app/features/dashboard/constants/mockExecutiveSummary";
 import { revenueIntelligence } from "@/app/features/dashboard/constants/mockRevenueIntelligence";
-
-import {
-  getDashboardData,
-} from "@/app/features/dashboard/services/dashboard-data.service";
-
-const dashboardData = getDashboardData();
 
 export default function DashboardPage() {
   return (
@@ -53,6 +45,7 @@ export default function DashboardPage() {
         userName="Mackson Alex"
       />
 
+      {/* Global Search */}
       <section className="mt-6">
         <GlobalSearch
           recentSearches={recentSearches}
@@ -60,10 +53,12 @@ export default function DashboardPage() {
         />
       </section>
 
+      {/* NEW — Executive Copilot */}
       <section className="mt-8">
         <ExecutiveCopilotPanel />
       </section>
 
+      {/* KPI Cards */}
       <section className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
         {dashboardData.kpis.map((kpi) => (
           <KpiCard
@@ -76,76 +71,61 @@ export default function DashboardPage() {
         ))}
       </section>
 
+      {/* Revenue Analytics + AI Assistant */}
       <section className="mt-8 grid gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2">
-          <RevenueChart
-            data={dashboardData.revenue}
-          />
+          <RevenueChart data={dashboardData.revenue} />
         </div>
 
         <AIAssistant />
       </section>
 
+      {/* AI Revenue Intelligence */}
       <section className="mt-8">
         <RevenueIntelligenceWidget
           intelligence={revenueIntelligence}
         />
       </section>
 
+      {/* Executive Summary */}
       <section className="mt-8">
         <ExecutiveSummaryWidget
           summaries={executiveSummary}
         />
       </section>
 
+      {/* AI Insights */}
       <section className="mt-8">
-        <AIInsightsWidget
-          insights={aiInsights}
-        />
+        <AIInsightsWidget insights={aiInsights} />
       </section>
 
+      {/* Quick Actions */}
       <section className="mt-8">
         <QuickActions />
       </section>
 
+      {/* Operations */}
       <section className="mt-8 grid gap-6 xl:grid-cols-2">
-        <NotificationCenter
-          notifications={notifications}
-        />
-
-        <CalendarWidget
-          events={calendarEvents}
-        />
+        <NotificationCenter notifications={notifications} />
+        <CalendarWidget events={calendarEvents} />
       </section>
 
+      {/* CRM */}
       <section className="mt-8 grid gap-6 xl:grid-cols-2">
-        <RecentLeads
-          leads={recentLeads}
-        />
-
-        <SalesPipeline
-          stages={pipelineStages}
-        />
+        <RecentLeads leads={recentLeads} />
+        <SalesPipeline stages={pipelineStages} />
       </section>
 
+      {/* Tasks + Team */}
       <section className="mt-8 grid gap-6 xl:grid-cols-2">
-        <TasksWidget
-          tasks={tasks}
-        />
-
-        <TeamPerformanceWidget
-          members={teamMembers}
-        />
+        <TasksWidget tasks={tasks} />
+        <TeamPerformanceWidget members={teamMembers} />
       </section>
 
+      {/* Strategy + Activity */}
       <section className="mt-8 grid gap-6 xl:grid-cols-2">
-        <GoalsWidget
-          goals={goals}
-        />
-
-        <ActivityFeed
-          items={dashboardData.activities}
-        />
+        <GoalsWidget goals={goals} />
+        <ActivityFeed items={dashboardData.activities} />
       </section>
     </main>
   );
