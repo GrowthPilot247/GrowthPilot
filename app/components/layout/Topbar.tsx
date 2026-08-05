@@ -3,7 +3,7 @@
 import { GlobalSearch } from "../search/GlobalSearch";
 import { NotificationBell } from "../notifications/NotificationBell";
 import { ThemeToggle } from "../theme/ThemeToggle";
-import { UserMenu } from "../user/UserMenu";
+import { UserMenu } from "./UserMenu/UserMenu";
 
 export function Topbar() {
   return (
@@ -23,7 +23,10 @@ export function Topbar() {
 
         <ThemeToggle />
 
-        <UserMenu />
+        <UserMenu
+  name="Chigozie Egwuatu"
+  email="admin@growthpilot247.com"
+/>
       </div>
     </header>
   );
