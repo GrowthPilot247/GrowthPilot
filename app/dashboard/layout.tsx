@@ -1,13 +1,17 @@
 import { ReactNode } from "react";
 
+import { DashboardShell } from "@/app/components/layout/DashboardShell";
+
+interface LayoutProps {
+  children: ReactNode;
+}
+
 export default function DashboardLayout({
   children,
-}: {
-  children: ReactNode;
-}) {
+}: LayoutProps) {
   return (
-    <>
+    <DashboardShell>
       {children}
-    </>
+    </DashboardShell>
   );
 }
