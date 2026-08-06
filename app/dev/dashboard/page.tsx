@@ -1,27 +1,16 @@
+import { AuroraHero } from "@/app/features/dashboard/components/AuroraHero";
+
 export default function DashboardLabPage() {
   return (
-    <main className="min-h-screen bg-background p-10">
-      <div className="mx-auto max-w-7xl space-y-6">
-        <div>
-          <h1 className="text-4xl font-bold tracking-tight">
-            Dashboard Lab
-          </h1>
-
-          <p className="mt-2 text-muted-foreground">
-            Safe environment for building and testing complete dashboard
-            experiences before promotion to production.
-          </p>
-        </div>
-
-        <div className="rounded-2xl border border-dashed border-border p-12 text-center">
-          <h2 className="text-2xl font-semibold">
-            Aurora Hero will be built here
-          </h2>
-
-          <p className="mt-4 text-muted-foreground">
-            This lab is isolated from the production dashboard.
-          </p>
-        </div>
+    <main className="min-h-screen bg-background p-8">
+      <div className="mx-auto max-w-7xl">
+        <AuroraHero
+          userName="Mackson Alex"
+          companyName="GrowthPilot"
+          businessHealth={96}
+          aiConfidence={98}
+          executiveBrief="GrowthPilot AI has analyzed your business overnight. Revenue continues to trend upward, customer acquisition remains above target, and three executive decisions require your attention today."
+        />
       </div>
     </main>
   );
