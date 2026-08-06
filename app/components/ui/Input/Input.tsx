@@ -17,7 +17,7 @@ export function Input({
   loading,
   leftIcon,
   rightIcon,
-  size = "md",
+  inputSize = "md",
   className,
   disabled,
   ...props
@@ -60,7 +60,7 @@ export function Input({
             success && "border-green-500",
             leftIcon && "pl-10",
             rightIcon && "pr-10",
-            sizeClasses[size],
+           sizeClasses[inputSize],
             className
           )}
           disabled={disabled || loading}
