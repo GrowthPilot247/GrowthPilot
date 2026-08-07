@@ -1,39 +1,61 @@
-import { TrendingUp, AlertTriangle, CheckCircle2 } from "lucide-react";
-import { WidgetShell } from "./WidgetShell";
+"use client";
+
+import {
+  TrendingUp,
+  AlertTriangle,
+  Lightbulb,
+} from "lucide-react";
+
+import { Button } from "@/app/components/ui/Button";
+import { Widget } from "@/app/components/ui/dashboard/Widget";
+import { WidgetHeader } from "@/app/components/ui/dashboard/WidgetHeader";
 
 const insights = [
   {
     id: 1,
     icon: TrendingUp,
-    title: "Revenue Momentum",
-    message:
-      "Revenue has increased by 18% over the last 30 days compared to the previous period.",
     color: "text-emerald-600",
+    title: "Revenue Opportunity",
+    summary: "Enterprise pipeline increased by 18%.",
+    impact: "+$42,000 projected monthly revenue",
+    action: "Review Enterprise Pipeline",
+    confidence: "98%",
   },
   {
     id: 2,
-    icon: CheckCircle2,
-    title: "Marketing Performance",
-    message:
-      "Lead conversion improved by 12% after your latest campaign optimization.",
-    color: "text-blue-600",
+    icon: AlertTriangle,
+    color: "text-amber-600",
+    title: "Customer Retention",
+    summary: "Churn risk increased in the Retail segment.",
+    impact: "Potential loss: $18,000 MRR",
+    action: "Launch retention campaign",
+    confidence: "92%",
   },
   {
     id: 3,
-    icon: AlertTriangle,
-    title: "Cash Flow Watch",
-    message:
-      "Projected cash flow may tighten within 45 days if current expense growth continues.",
-    color: "text-amber-600",
+    icon: Lightbulb,
+    color: "text-blue-600",
+    title: "AI Recommendation",
+    summary: "Manufacturing leads outperform average by 27%.",
+    impact: "Highest-performing acquisition channel",
+    action: "Increase ad spend by 15%",
+    confidence: "96%",
   },
 ];
 
 export function ExecutiveInsights() {
   return (
-    <WidgetShell
-      title="Executive Insights"
-      subtitle="AI-generated business highlights"
-    >
+    <Widget>
+      <WidgetHeader
+        title="Executive Insights"
+        description="AI-generated strategic recommendations"
+        action={
+          <Button size="sm" variant="outline">
+            View All
+          </Button>
+        }
+      />
+
       <div className="space-y-5">
         {insights.map((item) => {
           const Icon = item.icon;
@@ -41,27 +63,62 @@ export function ExecutiveInsights() {
           return (
             <div
               key={item.id}
-              className="flex gap-4 rounded-xl border border-slate-100 p-4 hover:bg-slate-50 transition-colors"
+              className="rounded-2xl border border-border p-5 transition-all duration-200 hover:shadow-md"
             >
-              <div
-                className={`flex h-10 w-10 items-center justify-center rounded-lg bg-slate-100 ${item.color}`}
-              >
-                <Icon className="h-5 w-5" />
-              </div>
+              <div className="flex items-start gap-4">
+                <div
+                  className={`flex h-11 w-11 items-center justify-center rounded-xl bg-muted ${item.color}`}
+                >
+                  <Icon className="h-5 w-5" />
+                </div>
 
-              <div className="flex-1">
-                <h4 className="font-semibold text-slate-900">
-                  {item.title}
-                </h4>
+                <div className="flex-1">
+                  <h4 className="font-semibold">
+                    {item.title}
+                  </h4>
 
-                <p className="mt-1 text-sm leading-6 text-slate-600">
-                  {item.message}
-                </p>
+                  <p className="mt-2 text-sm text-muted-foreground">
+                    {item.summary}
+                  </p>
+
+                  <div className="mt-4 grid gap-3 md:grid-cols-2">
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                        Business Impact
+                      </p>
+
+                      <p className="mt-1 text-sm font-medium">
+                        {item.impact}
+                      </p>
+                    </div>
+
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                        Recommended Action
+                      </p>
+
+                      <p className="mt-1 text-sm font-medium">
+                        {item.action}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="mt-4 flex items-center justify-between">
+                    <span className="text-xs text-muted-foreground">
+                      AI Confidence:{" "}
+                      <strong>{item.confidence}</strong>
+                    </span>
+
+                    <Button size="sm">
+                      View Analysis
+                    </Button>
+                  </div>
+                </div>
               </div>
             </div>
           );
         })}
       </div>
-    </WidgetShell>
+    </Widget>
   );
 }
