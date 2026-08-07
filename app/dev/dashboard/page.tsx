@@ -1,19 +1,21 @@
 import { AuroraHero } from "@/app/features/dashboard/components/AuroraHero";
-import { ExecutiveInsights } from "@/app/features/dashboard/components/ExecutiveInsights";
+import { ExecutiveCopilotPanel } from "@/app/features/dashboard/components/ExecutiveCopilot";
+import { ExecutiveAnalytics } from "@/app/features/dashboard/components/ExecutiveAnalytics";
 
 export default function DashboardLabPage() {
   return (
-    <main className="min-h-screen bg-background p-8">
-      <div className="mx-auto max-w-7xl space-y-8">
-        <AuroraHero
-          userName="Mackson Alex"
-          companyName="GrowthPilot"
-          businessHealth={96}
-          aiConfidence={98}
-          executiveBrief="GrowthPilot AI has analyzed your business overnight. Revenue continues to trend upward, customer acquisition remains above target, and three executive decisions require your attention today."
-        />
+    <main className="min-h-screen bg-slate-100">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-6 py-8">
 
-        <ExecutiveInsights />
+        {/* Executive Hero */}
+        <AuroraHero />
+
+        {/* Executive Copilot */}
+        <ExecutiveCopilotPanel />
+
+        {/* Executive Analytics */}
+        <ExecutiveAnalytics />
+
       </div>
     </main>
   );

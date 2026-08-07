@@ -1,40 +1,66 @@
 "use client";
 
-import { RevenueTrendChart } from "./RevenueTrendChart";
-import { BusinessHealthGauge } from "./BusinessHealthGauge";
-import { PipelineForecast } from "./PipelineForecast";
-import { MarketingROI } from "./MarketingROI";
-import { GrowthPrediction } from "./GrowthPrediction";
+import { RevenueIntelligence } from "./RevenueIntelligence";
+import { BusinessHealthCard } from "./BusinessHealthCard";
+import { PipelineIntelligence } from "./PipelineIntelligence";
+import { MarketingIntelligence } from "./MarketingIntelligence";
+import { AIGrowthForecast } from "./AIGrowthForecast";
+import { ExecutiveInsightStrip } from "./ExecutiveInsightStrip";
 
 export function ExecutiveAnalytics() {
   return (
-    <div className="rounded-2xl bg-white/10 p-6 backdrop-blur border border-white/10">
-      <div className="mb-6 flex items-center justify-between">
+    <section className="space-y-8">
+
+      {/* Header */}
+
+      <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-white">
+          <p className="text-sm font-semibold uppercase tracking-wider text-emerald-600">
+            Executive Intelligence
+          </p>
+
+          <h2 className="mt-2 text-3xl font-bold text-slate-900">
             Executive Analytics
           </h2>
 
-          <p className="mt-1 text-sm text-slate-400">
-            AI-powered business intelligence and executive insights
+          <p className="mt-2 max-w-3xl text-slate-600">
+            Executive intelligence generated from revenue,
+            sales, marketing, customer success and business
+            health signals across the GrowthPilot platform.
           </p>
         </div>
 
-        <div className="rounded-full bg-emerald-500/20 px-4 py-2 text-sm font-medium text-emerald-300">
-          LIVE
+        <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-5 py-3">
+          <p className="text-xs font-semibold uppercase tracking-wide text-emerald-600">
+            Executive Status
+          </p>
+
+          <p className="mt-1 text-lg font-bold text-emerald-700">
+            Healthy
+          </p>
         </div>
       </div>
 
+      {/* KPI Cards */}
+
       <div className="grid gap-6 lg:grid-cols-2">
-        <RevenueTrendChart />
-        <BusinessHealthGauge />
-        <PipelineForecast />
-        <MarketingROI />
+        <RevenueIntelligence />
+
+        <BusinessHealthCard />
+
+        <PipelineIntelligence />
+
+        <MarketingIntelligence />
       </div>
 
-      <div className="mt-6">
-        <GrowthPrediction />
-      </div>
-    </div>
+      {/* AI Forecast */}
+
+      <AIGrowthForecast />
+
+      {/* Executive Insights */}
+
+      <ExecutiveInsightStrip />
+
+    </section>
   );
 }

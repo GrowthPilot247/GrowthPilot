@@ -1,4 +1,4 @@
-import { ExecutiveCopilotPanel } from "@/app/features/dashboard/components/ExecutiveCopilotPanel";
+import { ExecutiveCopilotPanel } from "@/app/features/dashboard/components/ExecutiveCopilot/ExecutiveCopilotPanel";
 
 export default function CopilotLabPage() {
   return (

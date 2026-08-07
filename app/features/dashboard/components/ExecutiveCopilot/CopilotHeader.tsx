@@ -21,7 +21,7 @@ export function CopilotHeader({
           Executive Copilot
         </div>
 
-        <h1 className="mt-5 text-4xl font-bold">
+        <h1 className="mt-5 text-4xl font-bold text-white">
           {title}
         </h1>
 

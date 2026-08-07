@@ -50,11 +50,10 @@ export function BusinessHealthGauge() {
             />
 
             <RadialBar
-              background
-              clockWise
-              dataKey="value"
-              animationDuration={1800}
-            />
+  background
+  dataKey="value"
+  animationDuration={1800}
+/>
           </RadialBarChart>
         </ResponsiveContainer>
       </div>

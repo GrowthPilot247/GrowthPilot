@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import {
   ArrowRight,
   BrainCircuit,
@@ -9,19 +11,29 @@ import {
 
 import { getExecutiveIntelligence } from "@/app/features/dashboard/services/executive-intelligence.service";
 import { getHighestPriorityAlert } from "@/app/features/dashboard/services/executive-alert-engine.service";
+import type {
+  ExecutiveChatResponse,
+} from "@/app/features/dashboard/services/executive-chat.service";
 
-import { PrioritiesPanel } from "./ExecutiveCopilot/PrioritiesPanel";
-import { CopilotPrompt } from "./ExecutiveCopilot/CopilotPrompt";
-import { ExecutiveAnalytics } from "./ExecutiveAnalytics";
+import { PrioritiesPanel } from "./PrioritiesPanel";
+import { CopilotPrompt } from "./CopilotPrompt";
 
 export function ExecutiveCopilotPanel() {
   const intelligence = getExecutiveIntelligence();
   const alert = getHighestPriorityAlert();
 
+  const [conversation, setConversation] =
+    useState<ExecutiveChatResponse>({
+      title: "Executive Copilot",
+
+      message:
+        "Welcome back. Ask me about business health, executive priorities, revenue forecasts, marketing performance, or operational risks.",
+    });
+
   return (
     <section className="overflow-hidden rounded-2xl bg-gradient-to-r from-slate-900 via-slate-800 to-emerald-900 p-8 text-white shadow-xl">
-
       {/* Header */}
+
       <div className="flex items-center justify-between">
         <div>
           <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm">
@@ -40,11 +52,13 @@ export function ExecutiveCopilotPanel() {
 
         <div className="hidden rounded-full bg-emerald-500/20 px-4 py-2 text-sm lg:flex lg:items-center lg:gap-2">
           <span className="h-2 w-2 rounded-full bg-emerald-400" />
+
           LIVE • {intelligence.greeting.updated}
         </div>
       </div>
 
       {/* Executive Highlights */}
+
       <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         {intelligence.executiveBrief.map((item) => (
           <div
@@ -66,16 +80,20 @@ export function ExecutiveCopilotPanel() {
         ))}
       </div>
 
-      {/* Main Layout */}
+      {/* Main Grid */}
+
       <div className="mt-8 grid gap-6 xl:grid-cols-3">
 
-        {/* LEFT COLUMN */}
+        {/* Left Column */}
+
         <div className="space-y-6 xl:col-span-2">
 
           {/* Executive Brief */}
+
           <div className="rounded-xl bg-white/10 p-6 backdrop-blur">
             <h2 className="flex items-center gap-2 text-xl font-semibold">
               <TrendingUp className="h-5 w-5 text-emerald-300" />
+
               Executive Brief
             </h2>
 
@@ -102,88 +120,77 @@ export function ExecutiveCopilotPanel() {
           </div>
 
           {/* AI Recommendations */}
+
           <div className="rounded-xl bg-white/10 p-6 backdrop-blur">
             <h2 className="flex items-center gap-2 text-xl font-semibold">
               <BrainCircuit className="h-5 w-5 text-sky-300" />
+
               AI Recommendations
             </h2>
 
             <div className="mt-5 space-y-4">
-              {intelligence.recommendations.map((recommendation) => (
-                <div
-                  key={recommendation.id}
-                  className="flex gap-3 rounded-lg bg-white/5 p-3"
-                >
-                  <ArrowRight className="mt-1 h-4 w-4 text-emerald-300" />
+              {intelligence.recommendations.map(
+                (recommendation) => (
+                  <div
+                    key={recommendation.id}
+                    className="flex gap-3 rounded-lg bg-white/5 p-3"
+                  >
+                    <ArrowRight className="mt-1 h-4 w-4 text-emerald-300" />
 
-                  <div className="flex-1">
-                    <p className="font-medium text-white">
-                      {recommendation.title}
-                    </p>
+                    <div className="flex-1">
+                      <p className="font-medium text-white">
+                        {recommendation.title}
+                      </p>
 
-                    <p className="mt-1 text-sm text-slate-300">
-                      {recommendation.description}
-                    </p>
+                      <p className="mt-1 text-sm text-slate-300">
+                        {recommendation.description}
+                      </p>
 
-                    <span className="mt-2 inline-flex rounded-full bg-emerald-500/20 px-2 py-1 text-xs font-medium text-emerald-300">
-                      Priority {recommendation.priority}
-                    </span>
+                      <span className="mt-2 inline-flex rounded-full bg-emerald-500/20 px-2 py-1 text-xs font-medium text-emerald-300">
+                        Priority {recommendation.priority}
+                      </span>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ),
+              )}
             </div>
           </div>
 
-          {/* NEW EXECUTIVE ANALYTICS */}
-          <ExecutiveAnalytics />
-
         </div>
 
-        {/* RIGHT COLUMN */}
+        {/* Right Sidebar */}
+
         <div className="space-y-6">
 
           <PrioritiesPanel
             priorities={intelligence.priorities}
           />
 
-          <CopilotPrompt />
+          <CopilotPrompt
+            onResponse={setConversation}
+          />
 
-          {/* Conversation Preview */}
-          <div className="rounded-lg border border-slate-200 bg-slate-50 p-4 text-slate-900">
-            <h3 className="text-sm font-semibold">
-              Conversation Preview
+          {/* Executive Conversation */}
+
+          <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+            <h3 className="text-lg font-semibold text-slate-900">
+              Executive Conversation
             </h3>
 
-            <div className="mt-4 space-y-4 text-sm">
+            <div className="mt-5 rounded-lg bg-slate-50 p-4">
+              <p className="text-sm font-semibold text-emerald-700">
+                {conversation.title}
+              </p>
 
-              <div>
-                <p className="font-medium">
-                  You
-                </p>
-
-                <p className="text-slate-600">
-                  What should I focus on today?
-                </p>
-              </div>
-
-              <div>
-                <p className="font-medium text-emerald-700">
-                  Executive Copilot
-                </p>
-
-                <p className="mt-1 text-slate-700">
-                  Review the Enterprise Sales Pipeline first.
-                  Customer acquisition is exceeding target,
-                  while Retail churn requires immediate attention.
-                </p>
-              </div>
-
+              <p className="mt-3 whitespace-pre-line text-sm text-slate-700">
+                {conversation.message}
+              </p>
             </div>
           </div>
 
           {/* Executive Alert */}
-          <div className="rounded-lg border border-amber-200 bg-amber-50 p-4 text-slate-900">
 
+          <div className="rounded-lg border border-amber-200 bg-amber-50 p-4 text-slate-900">
             <div className="flex items-start gap-3">
 
               <div className="flex-1">
@@ -219,7 +226,6 @@ export function ExecutiveCopilotPanel() {
               </div>
 
             </div>
-
           </div>
 
         </div>
