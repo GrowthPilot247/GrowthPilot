@@ -1,7 +1,11 @@
-"use client";
-
 import { cn } from "@/app/lib/cn";
-import { StatCardProps } from "./StatCard.types";
+import type { StatCardProps } from "./StatCard.types";
+
+const trendColors = {
+  up: "text-emerald-600",
+  down: "text-red-600",
+  neutral: "text-muted-foreground",
+} as const;
 
 export function StatCard({
   title,
@@ -14,21 +18,21 @@ export function StatCard({
   footer,
   className,
 }: StatCardProps) {
-  const trendColor = {
-    up: "text-emerald-600 dark:text-emerald-400",
-    down: "text-red-600 dark:text-red-400",
-    neutral: "text-muted-foreground",
-  }[trend];
-
   return (
     <div
       className={cn(
-        "rounded-2xl border border-border bg-card p-6 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg",
+        "rounded-2xl",
+        "border border-border",
+        "bg-card",
+        "p-6",
+        "shadow-sm",
+        "transition-all duration-200",
+        "hover:-translate-y-0.5 hover:shadow-lg",
         className
       )}
     >
       {icon && (
-        <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+        <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
           {icon}
         </div>
       )}
@@ -37,12 +41,17 @@ export function StatCard({
         {title}
       </p>
 
-      <h3 className="mt-2 text-3xl font-bold tracking-tight">
+      <h3 className="mt-2 text-3xl font-bold tracking-tight text-foreground">
         {value}
       </h3>
 
       {change && (
-        <p className={cn("mt-2 text-sm font-medium", trendColor)}>
+        <p
+          className={cn(
+            "mt-2 text-sm font-medium",
+            trendColors[trend]
+          )}
+        >
           {change}
         </p>
       )}

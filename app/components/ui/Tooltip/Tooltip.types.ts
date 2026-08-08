@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 export type TooltipPlacement =
   | "top"
@@ -8,10 +8,7 @@ export type TooltipPlacement =
 
 export interface TooltipProps {
   content: ReactNode;
-
   children: ReactNode;
-
   placement?: TooltipPlacement;
-
   className?: string;
 }

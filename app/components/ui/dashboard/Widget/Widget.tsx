@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/app/lib/cn";
-import { WidgetProps } from "./Widget.types";
+import type { WidgetProps } from "./Widget.types";
 
 export function Widget({
   children,

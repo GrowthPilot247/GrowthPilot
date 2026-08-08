@@ -1,6 +1,7 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
+import { cn } from "@/app/lib/cn";
 
-interface DashboardCardProps {
+export interface DashboardCardProps {
   title: string;
   description?: string;
   icon?: ReactNode;
@@ -15,37 +16,49 @@ export function DashboardCard({
   icon,
   action,
   children,
-  className = "",
+  className,
 }: DashboardCardProps) {
   return (
     <section
-      className={`rounded-xl border border-slate-200 bg-white shadow-sm ${className}`}
+      className={cn(
+        "rounded-2xl",
+        "border border-border",
+        "bg-card",
+        "shadow-sm",
+        className
+      )}
     >
-      <header className="flex items-center justify-between border-b border-slate-100 p-6">
-        <div className="flex items-center gap-3">
+      <header className="flex items-start justify-between gap-4 border-b border-border px-6 py-5">
+        <div className="flex min-w-0 items-start gap-3">
           {icon && (
-            <div className="rounded-full bg-slate-100 p-2">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
               {icon}
             </div>
           )}
 
-          <div>
-            <h2 className="text-lg font-semibold text-slate-900">
+          <div className="min-w-0">
+            <h2 className="text-lg font-semibold text-foreground">
               {title}
             </h2>
 
             {description && (
-              <p className="text-sm text-slate-500">
+              <p className="mt-1 text-sm text-muted-foreground">
                 {description}
               </p>
             )}
           </div>
         </div>
 
-        {action}
+        {action && (
+          <div className="shrink-0">
+            {action}
+          </div>
+        )}
       </header>
 
-      <div className="p-6">{children}</div>
+      <div className="p-6">
+        {children}
+      </div>
     </section>
   );
 }

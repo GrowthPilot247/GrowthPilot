@@ -2,21 +2,14 @@
 
 import { useEffect } from "react";
 import { cn } from "@/app/lib/cn";
-import { ToastProps } from "./Toast.types";
+import type { ToastProps } from "./Toast.types";
 
 const variants = {
-  success:
-    "border-emerald-200 bg-emerald-50 text-emerald-900",
-
-  error:
-    "border-red-200 bg-red-50 text-red-900",
-
-  warning:
-    "border-amber-200 bg-amber-50 text-amber-900",
-
-  info:
-    "border-blue-200 bg-blue-50 text-blue-900",
-};
+  success: "border-emerald-200 bg-emerald-50 text-emerald-900",
+  error: "border-red-200 bg-red-50 text-red-900",
+  warning: "border-amber-200 bg-amber-50 text-amber-900",
+  info: "border-blue-200 bg-blue-50 text-blue-900",
+} as const;
 
 export function Toast({
   title,
@@ -39,34 +32,37 @@ export function Toast({
 
   return (
     <div
+      role="status"
+      aria-live="polite"
       className={cn(
-        "fixed bottom-6 right-6 z-50 w-96 rounded-xl border p-5 shadow-xl",
+        "fixed bottom-6 right-6 z-50",
+        "flex w-96 items-start justify-between gap-4",
+        "rounded-xl border p-5 shadow-xl",
         "animate-in fade-in slide-in-from-bottom-3 duration-300",
         variants[variant],
         className
       )}
     >
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <h4 className="font-semibold">
-            {title}
-          </h4>
+      <div className="min-w-0">
+        <p className="font-semibold">
+          {title}
+        </p>
 
-          {description && (
-            <p className="mt-2 text-sm opacity-90">
-              {description}
-            </p>
-          )}
-        </div>
-
-        <button
-          onClick={onClose}
-          className="text-lg font-bold opacity-70 hover:opacity-100"
-          aria-label="Close notification"
-        >
-          ×
-        </button>
+        {description && (
+          <div className="mt-2 text-sm opacity-90">
+            {description}
+          </div>
+        )}
       </div>
+
+      <button
+        type="button"
+        onClick={onClose}
+        className="shrink-0 rounded-md p-1 text-lg font-bold opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-current focus:ring-offset-2"
+        aria-label="Close notification"
+      >
+        ×
+      </button>
     </div>
   );
 }

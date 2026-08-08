@@ -18,12 +18,14 @@
   /* Background */
   --color-background: var(--background);
   --color-surface: #f8fafc;
+  --color-card: #ffffff;
 
   /* Text */
   --color-foreground: var(--foreground);
   --color-text-primary: #0f172a;
   --color-text-secondary: #475569;
   --color-text-muted: #64748b;
+  --color-muted-foreground: #64748b;
 
   /* Border */
   --color-border: #e2e8f0;

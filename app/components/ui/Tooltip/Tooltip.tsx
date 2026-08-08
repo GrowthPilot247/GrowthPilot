@@ -1,15 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 import { cn } from "@/app/lib/cn";
-import { TooltipProps } from "./Tooltip.types";
+import type { TooltipProps } from "./Tooltip.types";
 
 const positions = {
-  top: "bottom-full left-1/2 -translate-x-1/2 mb-2",
-  bottom: "top-full left-1/2 -translate-x-1/2 mt-2",
-  left: "right-full top-1/2 -translate-y-1/2 mr-2",
-  right: "left-full top-1/2 -translate-y-1/2 ml-2",
-};
+  top: "bottom-full left-1/2 mb-2 -translate-x-1/2",
+  bottom: "left-1/2 top-full mt-2 -translate-x-1/2",
+  left: "right-full top-1/2 mr-2 -translate-y-1/2",
+  right: "left-full top-1/2 ml-2 -translate-y-1/2",
+} as const;
 
 export function Tooltip({
   content,
@@ -18,6 +18,7 @@ export function Tooltip({
   className,
 }: TooltipProps) {
   const [visible, setVisible] = useState(false);
+  const tooltipId = useId();
 
   return (
     <div
@@ -27,13 +28,19 @@ export function Tooltip({
       onFocus={() => setVisible(true)}
       onBlur={() => setVisible(false)}
     >
-      {children}
+      <span aria-describedby={visible ? tooltipId : undefined}>
+        {children}
+      </span>
 
       {visible && (
         <div
+          id={tooltipId}
           role="tooltip"
           className={cn(
-            "absolute z-50 whitespace-nowrap rounded-lg bg-slate-900 px-3 py-2 text-sm text-white shadow-lg transition-opacity duration-200",
+            "absolute z-50 whitespace-nowrap",
+            "rounded-lg bg-slate-900 px-3 py-2",
+            "text-sm text-white shadow-lg",
+            "transition-opacity duration-200",
             positions[placement],
             className
           )}

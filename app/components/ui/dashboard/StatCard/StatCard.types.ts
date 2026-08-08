@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 export interface StatCardProps {
   title: string;
@@ -12,9 +12,9 @@ export interface StatCardProps {
   /**
    * Optional business status.
    * Example:
-   * Excellent
-   * Healthy
-   * Above Target
+   * - Excellent
+   * - Healthy
+   * - Above Target
    */
   status?: string;
 
@@ -31,7 +31,7 @@ export interface StatCardProps {
   /**
    * Footer text.
    * Example:
-   * Updated 5 minutes ago
+   * - Updated 5 minutes ago
    */
   footer?: string;
 

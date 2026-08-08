@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { cn } from "@/app/lib/cn";
-import { AccordionProps } from "./Accordion.types";
+import type { AccordionProps } from "./Accordion.types";
 
 export function Accordion({
   items,
@@ -14,7 +14,8 @@ export function Accordion({
     openItem ?? null
   );
 
-  const activeItem = openItem ?? internalOpen;
+  const activeItem =
+    openItem !== undefined ? openItem : internalOpen;
 
   const handleToggle = (id: string) => {
     const next = activeItem === id ? null : id;
@@ -27,12 +28,7 @@ export function Accordion({
   };
 
   return (
-    <div
-      className={cn(
-        "space-y-3",
-        className
-      )}
-    >
+    <div className={cn("space-y-3", className)}>
       {items.map((item) => {
         const isOpen = activeItem === item.id;
 
@@ -44,13 +40,22 @@ export function Accordion({
             <button
               type="button"
               onClick={() => handleToggle(item.id)}
-              className="flex w-full items-center justify-between px-5 py-4 text-left transition-colors hover:bg-slate-50"
+              aria-expanded={isOpen}
+              aria-controls={`accordion-panel-${item.id}`}
+              className={cn(
+                "flex w-full items-center justify-between",
+                "px-5 py-4 text-left",
+                "transition-colors hover:bg-slate-50",
+                "focus:outline-none focus:ring-2",
+                "focus:ring-emerald-500 focus:ring-inset"
+              )}
             >
               <span className="font-medium text-slate-900">
                 {item.title}
               </span>
 
               <span
+                aria-hidden="true"
                 className={cn(
                   "text-xl font-bold transition-transform duration-200",
                   isOpen && "rotate-45"
@@ -61,6 +66,8 @@ export function Accordion({
             </button>
 
             <div
+              id={`accordion-panel-${item.id}`}
+              role="region"
               className={cn(
                 "grid transition-all duration-300 ease-in-out",
                 isOpen

@@ -1,5 +1,5 @@
 import { cn } from "@/app/lib/cn";
-import { TableProps } from "./Table.types";
+import type { TableProps } from "./Table.types";
 
 export function Table({
   columns,
@@ -13,17 +13,22 @@ export function Table({
   return (
     <div
       className={cn(
-        "overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm",
+        "overflow-x-auto",
+        "rounded-2xl",
+        "border border-slate-200",
+        "bg-white",
+        "shadow-sm",
         className
       )}
     >
-      <table className="min-w-full border-collapse">
-        <thead className="bg-slate-50">
-          <tr>
+      <table className="w-full border-collapse text-left">
+        <thead>
+          <tr className="border-b border-slate-200 bg-slate-50">
             {columns.map((column) => (
               <th
                 key={column.key}
-                className="border-b border-slate-200 px-6 py-4 text-left text-sm font-semibold text-slate-700"
+                scope="col"
+                className="px-6 py-3 text-xs font-semibold uppercase tracking-wide text-slate-600"
               >
                 {column.title}
               </th>
@@ -36,7 +41,7 @@ export function Table({
             <tr>
               <td
                 colSpan={columns.length}
-                className="px-6 py-10 text-center text-slate-500"
+                className="px-6 py-10 text-center text-sm text-slate-500"
               >
                 Loading...
               </td>
@@ -45,7 +50,7 @@ export function Table({
             <tr>
               <td
                 colSpan={columns.length}
-                className="px-6 py-10 text-center text-slate-500"
+                className="px-6 py-10 text-center text-sm text-slate-500"
               >
                 {emptyMessage}
               </td>
@@ -55,14 +60,18 @@ export function Table({
               <tr
                 key={row.id}
                 className={cn(
-                  striped && index % 2 === 1 && "bg-slate-50",
-                  hover && "transition-colors hover:bg-emerald-50"
+                  "border-b border-slate-100 last:border-b-0",
+                  striped &&
+                    index % 2 === 1 &&
+                    "bg-slate-50",
+                  hover &&
+                    "transition-colors hover:bg-emerald-50"
                 )}
               >
                 {columns.map((column) => (
                   <td
                     key={column.key}
-                    className="border-b border-slate-100 px-6 py-4 text-sm text-slate-700"
+                    className="px-6 py-4 text-sm text-slate-700"
                   >
                     {row[column.key]}
                   </td>
