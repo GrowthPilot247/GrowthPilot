@@ -12,10 +12,14 @@ interface ExecutiveInsightCardProps {
   insight: IntelligenceInsight;
 }
 
-const priorityClasses = {
+const priorityClasses: Record<
+  IntelligenceInsight["priority"],
+  string
+> = {
   low: "bg-slate-100 text-slate-700",
   medium: "bg-amber-100 text-amber-700",
   high: "bg-red-100 text-red-700",
+  critical: "bg-red-200 text-red-800",
 };
 
 export function ExecutiveInsightCard({

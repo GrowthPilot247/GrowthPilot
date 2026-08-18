@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { cn } from "@/app/lib/cn";
-import { NotificationMenuProps } from "./NotificationMenu.types";
+import type { NotificationItem, NotificationMenuProps } from "./NotificationMenu.types";
 
 export function NotificationMenu({
   notifications,
@@ -11,7 +11,7 @@ export function NotificationMenu({
   const [open, setOpen] = useState(false);
 
   const unreadCount = notifications.filter(
-    (item) => item.unread
+    (item: NotificationItem) => item.unread,
   ).length;
 
   return (
@@ -40,7 +40,7 @@ export function NotificationMenu({
 
           {notifications.length === 0 ? (
             <div className="p-6 text-center text-slate-500">
-              You're all caught up.
+              You&apos;re all caught up.
             </div>
           ) : (
             <div className="max-h-96 overflow-y-auto">
