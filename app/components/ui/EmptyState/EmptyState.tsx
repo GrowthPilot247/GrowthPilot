@@ -1,5 +1,5 @@
 import { cn } from "@/app/lib/cn";
-import { EmptyStateProps } from "./EmptyState.types";
+import type { EmptyStateProps } from "./EmptyState.types";
 
 export function EmptyState({
   title,
@@ -22,23 +22,23 @@ export function EmptyState({
       )}
     >
       {icon && (
-        <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-emerald-50 text-4xl">
+        <div className="mb-4 flex items-center justify-center text-slate-400">
           {icon}
         </div>
       )}
 
-      <h3 className="text-2xl font-semibold text-slate-900">
+      <h3 className="text-xl font-semibold text-slate-900">
         {title}
       </h3>
 
       {description && (
-        <p className="mt-3 max-w-md text-slate-500">
+        <p className="mt-3 max-w-md text-sm text-slate-500">
           {description}
         </p>
       )}
 
       {action && (
-        <div className="mt-8">
+        <div className="mt-6">
           {action}
         </div>
       )}

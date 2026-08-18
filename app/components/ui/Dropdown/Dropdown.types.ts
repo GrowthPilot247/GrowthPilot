@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 export interface DropdownOption {
   label: string;
@@ -9,26 +9,15 @@ export interface DropdownOption {
 export interface DropdownProps {
   label?: string;
   placeholder?: string;
-
   options: DropdownOption[];
-
   value?: string;
-
   error?: string;
-
   helperText?: string;
-
   disabled?: boolean;
-
   loading?: boolean;
-
   fullWidth?: boolean;
-
   className?: string;
-
   onChange?: (value: string) => void;
-
   leftIcon?: ReactNode;
-
   rightIcon?: ReactNode;
 }

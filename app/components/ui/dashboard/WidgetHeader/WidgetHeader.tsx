@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/app/lib/cn";
-import { WidgetHeaderProps } from "./WidgetHeader.types";
+import type { WidgetHeaderProps } from "./WidgetHeader.types";
 
 export function WidgetHeader({
   title,
@@ -16,8 +16,8 @@ export function WidgetHeader({
         className
       )}
     >
-      <div>
-        <h3 className="text-lg font-semibold tracking-tight">
+      <div className="min-w-0">
+        <h3 className="text-lg font-semibold text-foreground">
           {title}
         </h3>
 

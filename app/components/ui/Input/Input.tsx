@@ -1,12 +1,15 @@
+"use client";
+
+import { useId } from "react";
 import { cn } from "@/app/lib/cn";
 import { Spinner } from "../Spinner";
-import { InputProps } from "./Input.types";
+import type { InputProps } from "./Input.types";
 
 const sizeClasses = {
-  sm: "h-10 text-sm px-3",
-  md: "h-11 text-sm px-4",
-  lg: "h-12 text-base px-5",
-};
+  sm: "h-10 px-3 text-sm",
+  md: "h-11 px-4 text-sm",
+  lg: "h-12 px-5 text-base",
+} as const;
 
 export function Input({
   label,
@@ -20,27 +23,53 @@ export function Input({
   inputSize = "md",
   className,
   disabled,
+  id,
   ...props
 }: InputProps) {
+  const generatedId = useId();
+  const inputId = id ?? generatedId;
+
+  const descriptionId = `${inputId}-description`;
+  const errorId = `${inputId}-error`;
+
+  const describedBy = error
+    ? errorId
+    : helperText
+      ? descriptionId
+      : undefined;
+
   return (
-    <div className="w-full space-y-2">
+    <div className="w-full">
       {label && (
-        <label className="block text-sm font-medium text-slate-700">
+        <label
+          htmlFor={inputId}
+          className="mb-2 block text-sm font-medium text-slate-900"
+        >
           {label}
+
           {required && (
-            <span className="ml-1 text-red-500">*</span>
+            <span
+              className="ml-1 text-red-500"
+              aria-hidden="true"
+            >
+              *
+            </span>
           )}
         </label>
       )}
 
       <div className="relative">
         {leftIcon && (
-          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
+          <div
+            className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+            aria-hidden="true"
+          >
             {leftIcon}
           </div>
         )}
 
         <input
+          id={inputId}
           className={cn(
             "w-full",
             "rounded-xl",
@@ -49,31 +78,44 @@ export function Input({
             "bg-white",
             "shadow-sm",
             "outline-none",
-            "transition-all",
+            "transition-colors",
             "duration-200",
             "focus:border-green-500",
             "focus:ring-2",
             "focus:ring-green-500/20",
-            "disabled:bg-slate-100",
             "disabled:cursor-not-allowed",
-            error && "border-red-500 focus:border-red-500",
-            success && "border-green-500",
+            "disabled:bg-slate-100",
+            "disabled:opacity-70",
+            error &&
+              "border-red-500 focus:border-red-500 focus:ring-red-500/20",
+            success &&
+              !error &&
+              "border-green-500 focus:border-green-500",
             leftIcon && "pl-10",
-            rightIcon && "pr-10",
-           sizeClasses[inputSize],
+            rightIcon || loading ? "pr-10" : null,
+            sizeClasses[inputSize],
             className
           )}
           disabled={disabled || loading}
+          required={required}
+          aria-invalid={error ? true : undefined}
+          aria-describedby={describedBy}
           {...props}
         />
 
         {loading ? (
-          <div className="absolute right-3 top-1/2 -translate-y-1/2">
+          <div
+            className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2"
+            aria-hidden="true"
+          >
             <Spinner size="sm" />
           </div>
         ) : (
           rightIcon && (
-            <div className="absolute right-3 top-1/2 -translate-y-1/2">
+            <div
+              className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2"
+              aria-hidden="true"
+            >
               {rightIcon}
             </div>
           )
@@ -81,11 +123,17 @@ export function Input({
       </div>
 
       {error ? (
-        <p className="text-sm text-red-500">
+        <p
+          id={errorId}
+          className="mt-1 text-sm text-red-500"
+        >
           {error}
         </p>
       ) : helperText ? (
-        <p className="text-sm text-slate-500">
+        <p
+          id={descriptionId}
+          className="mt-1 text-sm text-slate-500"
+        >
           {helperText}
         </p>
       ) : null}

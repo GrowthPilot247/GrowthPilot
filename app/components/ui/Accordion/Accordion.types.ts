@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 export interface AccordionItem {
   id: string;
@@ -8,10 +8,7 @@ export interface AccordionItem {
 
 export interface AccordionProps {
   items: AccordionItem[];
-
   openItem?: string;
-
   onChange?: (id: string) => void;
-
   className?: string;
 }
