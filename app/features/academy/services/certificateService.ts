@@ -67,6 +67,19 @@ export function getCertificate(
 }
 
 /**
+ * Finds an issued certificate by its internal ID.
+ */
+export function getCertificateById(
+  certificateId: string,
+): AcademyCertificate | undefined {
+  return academyCertificates.find(
+    (certificate) =>
+      certificate.id === certificateId &&
+      certificate.status === "Issued",
+  );
+}
+
+/**
  * Finds a certificate using its public verification code.
  */
 export function getCertificateByVerificationCode(
